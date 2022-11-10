@@ -1,5 +1,10 @@
 FROM serversideup/php:8.1-fpm-nginx
 
+LABEL org.opencontainers.image.source=https://github.com/alexjustesen/speedtest-tracker/blob/main/Dockerfile
+LABEL org.opencontainers.image.documentation=https://docs.speedtest-tracker.dev/
+LABEL org.opencontainers.image.url=https://github.com/alexjustesen/speedtest-tracker
+LABEL org.opencontainers.image.licenses=MIT
+
 # Add /config to allowed directory tree
 ENV PHP_OPEN_BASEDIR=$WEBUSER_HOME:/config/:/dev/stdout:/tmp
 
