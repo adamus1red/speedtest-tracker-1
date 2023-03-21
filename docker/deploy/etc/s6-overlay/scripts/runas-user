@@ -13,7 +13,7 @@ if [[ $PUID != 9999 || $PGID != 9999 ]]; then
     usermod -o -u "$PUID" webuser
 
     # Make sure the home directory is updated with the proper UID & GID
-    chown webuser:webgroup $WEBUSER_HOME
+    chown webuser:webgroup $WEBUSER_HOME /config
 fi
 
 if [[ $S6_LOGGING != 1 ]]; then
