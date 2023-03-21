@@ -45,6 +45,7 @@ class SendDataToInfluxDbV2 implements ShouldQueue
             'org' => optional($this->settings)->v2_org,
             'bucket' => optional($this->settings)->v2_bucket,
             'token' => optional($this->settings)->v2_token,
+            'verifySSL' => $this->settings->v2_verify_ssl,
         ];
 
         $client = new Client([
@@ -52,6 +53,7 @@ class SendDataToInfluxDbV2 implements ShouldQueue
             'token' => $influxdb['token'],
             'bucket' => $influxdb['bucket'],
             'org' => $influxdb['org'],
+            'verifySSL' => $influxdb['verifySSL'],
             'precision' => \InfluxDB2\Model\WritePrecision::S,
         ]);
 
@@ -59,7 +61,7 @@ class SendDataToInfluxDbV2 implements ShouldQueue
 
         $dataArray = [
             'name' => 'speedtest',
-            'tags' => null,
+            'tags' => $this->result->formatTagsForInfluxDB2(),
             'fields' => $this->result->formatForInfluxDB2(),
             'time' => strtotime($this->result->created_at),
         ];

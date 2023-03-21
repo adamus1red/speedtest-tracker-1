@@ -244,7 +244,7 @@ return [
             'alignment' => 'right',
         ],
         'sidebar' => [
-            'is_collapsible_on_desktop' => false,
+            'is_collapsible_on_desktop' => true,
             'groups' => [
                 'are_collapsible' => true,
             ],
@@ -262,7 +262,7 @@ return [
     |
     */
 
-    'favicon' => public_path('img/speedtest-tracker-icon.png'),
+    'favicon' => env('app.url').'/img/speedtest-tracker-icon.png',
 
     /*
     |--------------------------------------------------------------------------

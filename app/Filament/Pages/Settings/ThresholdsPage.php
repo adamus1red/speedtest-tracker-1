@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages\Settings;
 
+use App\Settings\GeneralSettings;
 use App\Settings\ThresholdSettings;
 use Closure;
 use Filament\Forms\Components\Card;
@@ -26,6 +27,13 @@ class ThresholdsPage extends SettingsPage
     protected static ?string $navigationLabel = 'Thresholds';
 
     protected static string $settings = ThresholdSettings::class;
+
+    protected function getMaxContentWidth(): string
+    {
+        $settings = new GeneralSettings();
+
+        return $settings->content_width;
+    }
 
     protected function getFormSchema(): array
     {
@@ -56,18 +64,27 @@ class ThresholdsPage extends SettingsPage
                                             TextInput::make('absolute_download')
                                                 ->label('Download')
                                                 ->hint('Mbps')
-                                                ->helperText('Leave empty to skip this metric.')
-                                                ->numeric(),
+                                                ->helperText('Set to zero to disable this metric.')
+                                                ->default(0)
+                                                ->minValue(0)
+                                                ->numeric()
+                                                ->required(),
                                             TextInput::make('absolute_upload')
                                                 ->label('Upload')
                                                 ->hint('Mbps')
-                                                ->helperText('Leave empty to skip this metric.')
-                                                ->numeric(),
+                                                ->helperText('Set to zero to disable this metric.')
+                                                ->default(0)
+                                                ->minValue(0)
+                                                ->numeric()
+                                                ->required(),
                                             TextInput::make('absolute_ping')
                                                 ->label('Ping')
                                                 ->hint('Ms')
-                                                ->helperText('Leave empty to skip this metric.')
-                                                ->numeric(),
+                                                ->helperText('Set to zero to disable this metric.')
+                                                ->default(0)
+                                                ->minValue(0)
+                                                ->numeric()
+                                                ->required(),
                                         ])
                                         ->columns([
                                             'default' => 1,
